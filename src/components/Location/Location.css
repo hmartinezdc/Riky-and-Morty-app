@@ -1,32 +1,37 @@
-.section_location {
+.section__location {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 75%;
-    gap: 10px;
+    gap: 30px;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
     
 }
-.section_location h2 {
+.section__location h2 {
     color: rgb(43, 255, 0);
 }
-.section_description {
+.section__description {
     list-style: none;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     width: 100%;
 }
-.section_description span {
+.section__description span {
     color: rgb(43, 255, 0);
     
 }
 @media (max-width: 576px) {
-    .section_location {
+    .section__location {
         width: 90%;
         gap: 20px;
         text-align: center;
+        padding: 10px;
     }
-    .section_description {
+    .section__description {
         gap: 20px;
     }
 }

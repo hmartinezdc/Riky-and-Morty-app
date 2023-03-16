@@ -2,11 +2,11 @@ import React from 'react';
 import './Location.css';
 const Location = ({ name, type, dimension, residents }) => {
   return (
-    <section className="section_location">
+    <section className="section__location">
       <h2>
         <span>Name: </span> {name}
       </h2>
-      <ul className="section_description">
+      <ul className="section__description">
         <li>
           <span>Type: </span>
           {type}

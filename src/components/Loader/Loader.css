@@ -58,5 +58,6 @@
         transform: rotateX(-10deg);
       }
       .portal {
-        padding-top: 100px;
+        padding-top: 80px;
+        font-size: 14px;
       }
