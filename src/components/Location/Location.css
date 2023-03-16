@@ -1,0 +1,32 @@
+.section_location {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 75%;
+    gap: 10px;
+    
+}
+.section_location h2 {
+    color: rgb(43, 255, 0);
+}
+.section_description {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+.section_description span {
+    color: rgb(43, 255, 0);
+    
+}
+@media (max-width: 576px) {
+    .section_location {
+        width: 90%;
+        gap: 20px;
+        text-align: center;
+    }
+    .section_description {
+        gap: 20px;
+    }
+}

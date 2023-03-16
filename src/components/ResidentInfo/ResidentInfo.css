@@ -1,0 +1,11 @@
+.resident__info {
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+}
+.resident__info__img {
+    width: 100%;
+}
+.resident__info ul {
+    list-style: none;
+}

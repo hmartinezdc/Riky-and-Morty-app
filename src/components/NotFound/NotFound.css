@@ -1,0 +1,13 @@
+.not__found-title {
+    padding-top: 40px;
+    font-weight: 300;
+}
+.not__found {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.not__found img {
+    width: 100%;
+}
