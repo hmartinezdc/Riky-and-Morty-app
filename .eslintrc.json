@@ -1,6 +1,13 @@
 {
-    "extends": ["react-app", "plugin:prettier/recommended"],
-    "rules": {
-      "prettier/prettier": "warn"
-    }
+  "extends": [
+    "react-app",
+    "plugin:prettier/recommended",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "prettier/prettier": "warn",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
+  }
 }

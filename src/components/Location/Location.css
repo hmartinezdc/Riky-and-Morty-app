@@ -24,6 +24,11 @@
     color: rgb(43, 255, 0);
     
 }
+@media (max-width: 768px) {
+    .section__location {
+        width: 90%;
+    }
+}
 @media (max-width: 576px) {
     .section__location {
         width: 90%;

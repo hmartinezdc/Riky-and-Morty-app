@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Location.css';
+
 const Location = ({ name, type, dimension, residents }) => {
   return (
     <section className="section__location">
@@ -22,6 +24,13 @@ const Location = ({ name, type, dimension, residents }) => {
       </ul>
     </section>
   );
+};
+
+Location.propTypes = {
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  dimension: PropTypes.string.isRequired,
+  residents: PropTypes.array.isRequired,
 };
 
 export default Location;

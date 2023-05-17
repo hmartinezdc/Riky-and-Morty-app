@@ -1,30 +1,27 @@
-import axios from 'axios';
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import './ResidentInfo.css';
+import './ResidentCard.css';
 import GetStatus from '../../utils/GetStatus';
+import { getCharacterByUrl } from '../../services/getCharacterByUrl';
+import Spinner from '../Spinner/Spinner';
 
-const ResidentInfo = ({ urlResident }) => {
+const ResidentCard = ({ urlResident }) => {
   const [residentInfo, setResidentInfo] = useState(null);
 
-  const loadResidentInfo = async () => {
-    try {
-      const res = await axios.get(urlResident);
-      setResidentInfo(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
+    const loadResidentInfo = async () => {
+      const residentData = await getCharacterByUrl(urlResident);
+      setResidentInfo(residentData);
+    };
     loadResidentInfo();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [urlResident]);
 
   return (
     <>
-      {residentInfo && (
+      {residentInfo ? (
         <article className="resident__info">
           <div className="resident__info__img">
-            <img src={residentInfo.image} alt={residentInfo.name} />
+            <img loading="lazy" src={residentInfo.image} alt={residentInfo.name} />
           </div>
           <h3>{residentInfo.name}</h3>
           <ul className="resident__description">
@@ -41,16 +38,20 @@ const ResidentInfo = ({ urlResident }) => {
               {residentInfo.origin.name}
             </li>
             <li>
-              <span>
-                Appearance<br></br> in episodes:
-              </span>
+              <span>Appearance in episodes:</span>
               {residentInfo.episode.length}
             </li>
           </ul>
         </article>
+      ) : (
+        <Spinner />
       )}
     </>
   );
 };
 
-export default ResidentInfo;
+ResidentCard.propTypes = {
+  urlResident: PropTypes.string.isRequired,
+};
+
+export default ResidentCard;

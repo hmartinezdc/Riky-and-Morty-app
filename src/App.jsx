@@ -1,70 +1,61 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { getRandomNumber } from './utils/GetRandomNumber';
+import { getLocationById } from './services/getLocationById';
+import Header from './components/Header/Header';
+import Loading from './components/Loading/Loading';
 import Location from './components/Location/Location';
 import ResidentList from './components/ResidentList/ResidentList';
-import './App.css';
-import Loader from './components/Loader/Loader';
 import Footer from './components/Footer/Footer';
-import NotFound from './components/NotFound/NotFound';
+import SearchForm from './components/SearchForm/SearchForm';
+import './App.css';
 
 const App = () => {
   const [locationInfo, setLocationInfo] = useState(null);
-  const [idLocationValue, setIdLocationValue] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
 
-  const getIdLocationRandom = () => getRandomNumber(1, 126);
+  const getIdRandom = () => getRandomNumber(1, 126);
 
-  const loadLocationInfo = async (idLocation) => {
-    const url = `https://rickandmortyapi.com/api/location/${idLocation}`;
-
-    try {
-      const res = await axios.get(url);
-      setLocationInfo(res.data);
-    } catch (error) {
-      console.log(error);
-    }
+  const handleFocus = () => {
+    setIsFocused(true);
   };
 
-  const idLocationHandleOnChange = (e) => {
-    const newValue = e.target.value;
-    if (/^\d{0,3}$/.test(newValue)) setIdLocationValue(newValue);
+  const handleBlur = () => {
+    setIsFocused(false);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (idLocationValue) {
-      loadLocationInfo(idLocationValue);
-    } else loadLocationInfo(getIdLocationRandom());
+  const loadLocationInfo = async (LocationId) => {
+    const locationData = await getLocationById(LocationId);
+    setLocationInfo(locationData);
   };
+
+  const handleSendSubmit = (id) => {
+    if (id) {
+      loadLocationInfo(id);
+    } else loadLocationInfo(getIdRandom());
+  };
+
   useEffect(() => {
-    loadLocationInfo(getIdLocationRandom());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    loadLocationInfo(getIdRandom());
   }, []);
 
   return (
     <>
-      <header className="header"></header>
-      <form className="form" onSubmit={handleSubmit}>
-        <input
-          className="form__seach"
-          type="search"
-          name="id-location"
-          value={idLocationValue}
-          onChange={idLocationHandleOnChange}
-          placeholder="Type a number between 1 and 126"
-        />
-        <input className="form__submit" type="submit" value="Search" />
-      </form>
-      {locationInfo && <Location {...locationInfo} />}
-      {locationInfo && idLocationValue < 127 ? (
-        locationInfo.residents.length === 0 ? (
-          <Loader />
-        ) : (
-          <ResidentList residents={locationInfo.residents} />
-        )
+      <Header isFocused={isFocused} />
+      {locationInfo ? (
+        <>
+          <SearchForm
+            onSubmit={handleSendSubmit}
+            handleFocus={handleFocus}
+            handleBlur={handleBlur}
+            isFocused={isFocused}
+          />
+          <Location {...locationInfo} />
+        </>
       ) : (
-        <NotFound />
+        <Loading />
       )}
+      {locationInfo && <ResidentList residents={locationInfo.residents} />}
+      {/* <ResidentList residents={locationInfo?.residents} /> */}
       <Footer />
     </>
   );

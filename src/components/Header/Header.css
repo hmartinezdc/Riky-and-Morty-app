@@ -1,0 +1,36 @@
+.header img {
+    width: 0;
+    flex-grow: 1;
+    object-fit: cover;
+    object-position: center 0;
+    opacity: .5;
+    transition: .9s ease;
+}
+/* Clase de que activa con onFocus y onBlur */
+.focused.header>img:nth-child(4){      
+        flex-grow: 4;
+        opacity: 1;
+        filter: contrast(120%);
+}
+/* -------------------- * ------------------ */
+@media (hover: hover) {
+    .header img:hover {
+        cursor: crosshair;
+        flex-grow: 4;
+        opacity: 1;
+        filter: contrast(120%);
+    }
+}
+@media (max-width: 768px) {
+    .focused.header>img:nth-child(4){      
+        flex-grow: 16;
+    }
+    /* .header img {
+        display: none;
+    } */
+}
+@media (max-width: 576px) {
+    /* .header img {
+        display: none;
+    } */
+}

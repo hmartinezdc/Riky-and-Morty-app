@@ -10,6 +10,6 @@
 **/*.md
 build
 
-.eslintrc.js
+.eslintrc.json
 *.config.cjs
 vite.config.*
